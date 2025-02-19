@@ -2,6 +2,26 @@
 
 <PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<Row>
+    <Column>
+        <h1>
+            Socks: @socks
+        </h1>
+    </Column>
+</Row>
+<Row>
+    <Column>
+        <Button Class="w-100 btn btn-primary" Clicked="Clicked">
+                <Image Class="vw-100 h-95" Source="Sock clicker\dirtySock.png" Text="A sock..." />
+        </Button>
+    </Column>
+</Row>
 
-Welcome to your new app.
+@code {
+    private int socks = 0;
+
+    private void Clicked()
+    {
+        socks += 1;
+    }
+}
