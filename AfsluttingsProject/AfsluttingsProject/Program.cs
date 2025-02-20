@@ -1,5 +1,6 @@
 using AfsluttingsProject;
 using Blazored.SessionStorage;
+using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Blazorise;
@@ -19,7 +20,7 @@ builder.Services
     .AddFontAwesomeIcons();
 
 builder.Services.AddBlazoredSessionStorage();
-
+builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
 await builder.Build().RunAsync();

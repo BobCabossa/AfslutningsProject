@@ -4,13 +4,6 @@
 
 <Row>
     <Column>
-        <h1>
-            Socks: @socksController?.saveData.socks
-        </h1>
-    </Column>
-</Row>
-<Row Class="mb-4">
-    <Column>
         <Button Class="w-100 btn btn-primary" Clicked="Clicked">
             <Image Class="w-100" Source="Sock clicker\dirtySock.png" Text="A sock..." />
         </Button>
@@ -24,7 +17,8 @@
     private void Clicked()
     {
         if (socksController == null) return;
-        
+
         socksController.saveData.socks += 1;
+        MainLayout.Instance?.forceUpdate();
     }
 }

@@ -1,11 +1,39 @@
-﻿@code {
-    public static SocksController? Instance { get; private set; }
+﻿@inject Blazored.LocalStorage.ILocalStorageService localStorage
 
-    // protected override void OnInitialized() { }
+@code {
+    private const string localStorageKey = "saveData";
+
+    public static SocksController? Instance { get; private set; }
+    public SocksSaveData saveData = new();
+
+    private Timer timer = new(3000)
+        {
+            AutoReset = true,
+        };
+
     protected override async Task OnInitializedAsync()
     {
         Instance = this;
+        timer.Elapsed += OnTimedEvent;
+        string saveData = await localStorage.GetItemAsStringAsync(localStorageKey) ?? "0";
+        if (int.TryParse(saveData, out int socks))
+        {
+            this.saveData = new()
+            {
+                socks = socks
+            };
+        }
+        MainLayout.Instance?.forceUpdate();
+        timer.Start();
     }
 
-    public SocksSaveData saveData = new();
+    public async void Save()
+    {
+        await localStorage.SetItemAsStringAsync(localStorageKey, saveData.socks.ToString());
+    }
+
+    private void OnTimedEvent(object? sender, ElapsedEventArgs e)
+    {
+        Save();
+    }
 }

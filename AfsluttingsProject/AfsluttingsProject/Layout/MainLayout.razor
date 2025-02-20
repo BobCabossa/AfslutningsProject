@@ -5,8 +5,10 @@
     </div>
 
     <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+        <div class="top-row" style="justify-content: flex-start !important">
+            <h3>
+                Socks: @socksController?.saveData.socks
+            </h3>
         </div>
 
         <article class="content px-4">
@@ -14,3 +16,20 @@
         </article>
     </main>
 </div>
+
+@code {
+    [CascadingParameter(Name = "SocksController")]
+    private SocksController? socksController { get; set; }
+
+    public static MainLayout? Instance { get; private set; }
+
+    protected override void OnInitialized()
+    {
+        Instance = this;
+    }
+
+    public void forceUpdate()
+    {
+        StateHasChanged();
+    }
+}
