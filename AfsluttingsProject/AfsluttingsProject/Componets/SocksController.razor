@@ -1,0 +1,11 @@
+﻿@code {
+    public static SocksController? Instance { get; private set; }
+
+    // protected override void OnInitialized() { }
+    protected override async Task OnInitializedAsync()
+    {
+        Instance = this;
+    }
+
+    public SocksSaveData saveData = new();
+}

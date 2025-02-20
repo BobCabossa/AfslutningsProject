@@ -5,23 +5,26 @@
 <Row>
     <Column>
         <h1>
-            Socks: @socks
+            Socks: @socksController?.saveData.socks
         </h1>
     </Column>
 </Row>
 <Row Class="mb-4">
     <Column>
         <Button Class="w-100 btn btn-primary" Clicked="Clicked">
-                <Image Class="w-100" Source="Sock clicker\dirtySock.png" Text="A sock..." />
+            <Image Class="w-100" Source="Sock clicker\dirtySock.png" Text="A sock..." />
         </Button>
     </Column>
 </Row>
 
 @code {
-    private int socks = 0;
+    [CascadingParameter(Name = "SocksController")]
+    private SocksController? socksController { get; set; }
 
     private void Clicked()
     {
-        socks += 1;
+        if (socksController == null) return;
+        
+        socksController.saveData.socks += 1;
     }
 }
